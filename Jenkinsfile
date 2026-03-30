@@ -1,13 +1,15 @@
 pipeline {
     agent {
         kubernetes {
+            cloud 'k8s'
+            label 'flask-python-agent'
             yaml """
 apiVersion: v1
 kind: Pod
 spec:
   containers:
   - name: python
-    image: python:3.7.2
+    image: python:3.10
     command:
     - cat
     tty: true
