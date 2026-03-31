@@ -17,6 +17,10 @@ spec:
         }
     }
 
+    triggers {
+        pollSCM('* * * * *')
+    }
+
     stages {
         stage('Test Python') {
             steps {
