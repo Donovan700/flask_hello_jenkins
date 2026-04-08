@@ -49,8 +49,8 @@ spec:
             steps {
                 container('docker') {
                     sh "docker version"
-                    sh "docker build -t registry.jenkins.svc.cluster.local:5000/pythontest:latest ."
-                    sh "docker push registry.jenkins.svc.cluster.local:5000/pythontest:latest"
+                    sh "docker build -t localhost:32000/pythontest:latest ."
+                    sh "docker push localhost:32000/pythontest:latest"
                 }
             }
         }
