@@ -23,6 +23,12 @@ spec:
     - mountPath: /var/run/docker.sock
       name: docker-sock
 
+  - name: kubectl
+    image: lachlanevenson/k8s-kubectl:v1.17.2
+    command:
+    - cat
+    tty: true
+
   volumes:
   - name: docker-sock
     hostPath:
@@ -51,6 +57,15 @@ spec:
                     sh "docker version"
                     sh "docker build -t localhost:32000/pythontest:latest ."
                     sh "docker push localhost:32000/pythontest:latest"
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                container('kubectl') {
+                    sh "kubectl apply -f ./kubernetes/deployment.yaml"
+                    sh "kubectl apply -f ./kubernetes/service.yaml"
                 }
             }
         }
